@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+    <body>
+    <div class="wrapper wrapper-small">
+        <h1>Информация о пользователе '<span th:text="${user.username}"/>'</h1>
+        <hr>
+        <div class="info-card">
+            <div class="group-50">
+                <p class="label">Full name</p>
+                <input class="form-control" type="text" th:value="|${user.name}  ${user.lastName}|">
+            </div>
+            <div class="group-50">
+                <p class="label">Username</p>
+                <input class="form-control" type="text" th:value="${user.username}">
+            </div>
+            <div class="group-50">
+                <p class="label">password</p>
+                <input class="form-control" type="password" th:value="${user.password}">
+            </div>
+            <div class="group-50">
+                <p class="label">Birthday</p>
+                <input class="form-control" type="text" th:value="${user.birthday}">
+            </div>
+            <div class="group-100">
+                <p class="label">Roles</p>
+                <input class="form-control" type="text" th:value="${#strings.listJoin(roles, ', ')}">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
