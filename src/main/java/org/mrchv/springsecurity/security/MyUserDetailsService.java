@@ -6,13 +6,12 @@ import org.mrchv.springsecurity.model.User;
 import org.mrchv.springsecurity.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Set;
 
 @Service
 public class MyUserDetailsService implements UserDetailsService  {
@@ -26,19 +25,28 @@ public class MyUserDetailsService implements UserDetailsService  {
 
     @PostConstruct
     public void init() {
-        Role adminRole = new Role("ROLE_ADMIN");
-        Role userRole = new Role("ROLE_USER");
-
         User admin = User.builder()
                 .name("ivan")
                 .lastName("ivanov")
                 .birthday(LocalDate.of(1994, 04, 5))
                 .username("admin")
                 .password("admin")
-                .roles(Set.of(adminRole, userRole))
+                .roles(Set.of(new Role("ROLE_ADMIN"), new Role("ROLE_USER")))
                 .build();
 
-        userService.saveUser(admin);
+        userService.addUser(admin);
+
+
+        User user = User.builder()
+                .name("vladimir")
+                .lastName("marychev")
+                .birthday(LocalDate.of(1996, 9, 16))
+                .username("user")
+                .password("user")
+                .roles(Set.of(new Role("ROLE_USER")))
+                .build();
+
+        userService.addUser(user);
     }
 
     @Override
