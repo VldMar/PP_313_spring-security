@@ -41,13 +41,13 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void saveUser(User user) {
-        User userFromDb = findByUserName(user.getUsername());
-        if (userFromDb != null) {
-            return;
+    public void addUser(User user) {
+        User userFromDB = findByUserName(user.getUsername());
+        if (userFromDB != null) {
+            throw new RuntimeException("Пользователь с username=%s уже существует!".formatted(user.getUsername()));
         }
 
-        if (user.getRoles() == null) {
+        if(user.getRoles() == null) {
             user.setRoles(Set.of(new Role("ROLE_USER")));
         }
 
@@ -55,6 +55,24 @@ public class UserServiceImpl implements UserService{
         userRepo.save(user);
     }
 
+    @Override
+    public void updateUser(User user) {
+        User userFromDB = findUserById(user.getId());
+        if (userFromDB == null) {
+            throw new RuntimeException("Пользователь с username=%s не найден!".formatted(user.getUsername()));
+        }
+
+        if (user.getRoles() == null) {
+            user.setRoles(userFromDB.getRoles());
+        }
+
+        String password = user.getPassword() == ""
+                ?   userFromDB.getPassword()
+                :   encoder.encode(user.getPassword());
+
+        user.setPassword(password);
+        userRepo.save(user);
+    }
 
     @Override
     public void removeUserById(Long id) {

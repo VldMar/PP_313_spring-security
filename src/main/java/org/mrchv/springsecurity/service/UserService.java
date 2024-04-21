@@ -8,6 +8,7 @@ public interface UserService {
     List<User> findAllUsers();
     User findUserById(Long id);
     User findByUserName(String username);
-    void saveUser(User user);
+    void addUser(User user);
+    void updateUser(User user);
     void removeUserById(Long id);
 }

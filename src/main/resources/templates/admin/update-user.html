@@ -9,7 +9,7 @@
 <body>
 <div class="wrapper">
     <h1>Изменить параметры пользователя</h1>
-    <form th:method="POST" th:action="@{/admin/save}" th:object="${user}">
+    <form th:method="put" th:action="@{/admin/update}" th:object="${user}">
         <input type="hidden" th:field="*{id}"/>
         <div class="form-group">
             <label for="name">Имя</label>
@@ -23,7 +23,16 @@
             <label for="birthday">Дата рождения</label>
             <input id="birthday" type="date" th:field="*{birthday}" class="form-control">
         </div>
-
+        <hr>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input id="username" type="text" th:field="*{username}" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="password">Пароль</label>
+            <input id="password" type="password" th:field="*{password}" placeholder="введите новый пароль" class="form-control">
+        </div>
+        <hr>
         <button type="submit" class="btn main-btn">Изменить</button>
     </form>
 </div>

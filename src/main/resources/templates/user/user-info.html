@@ -32,6 +32,9 @@
                 <input class="form-control" type="text" th:value="${#strings.listJoin(roles, ', ')}">
             </div>
         </div>
+        <hr>
+        <a class="btn logout-btn"th:href="@{/logout}">Выход</a>
+
     </div>
 </body>
 </html>
