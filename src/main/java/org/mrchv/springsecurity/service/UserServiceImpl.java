@@ -16,12 +16,10 @@ import java.util.Set;
 public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepo;
-    private final RoleRepository roleRepo;
     private PasswordEncoder encoder;
 
-    public UserServiceImpl(UserRepository userRepo, RoleRepository roleRepo, PasswordEncoder encoder) {
+    public UserServiceImpl(UserRepository userRepo, PasswordEncoder encoder) {
         this.userRepo = userRepo;
-        this.roleRepo = roleRepo;
         this.encoder = encoder;
     }
 
